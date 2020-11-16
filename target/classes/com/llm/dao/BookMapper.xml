@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.llm.dao.BookMapper">
+    <insert id="addBook" parameterType="Books" >
+        insert into idea_test.books (bookName, bookCounts, detail)
+        values (#{bookName},#{bookCounts},#{detail});
+    </insert>
+
+    <delete id="deleteBookById" parameterType="int">
+        delete from idea_test.books where bookID=#{bookId};
+    </delete>
+    
+    <update id="updateBook" parameterType="Books">
+        update idea_test.books
+        set bookName=#{bookName},bookCounts=#{bookCounts},detail=#{detail}
+        where bookID = #{bookID};
+    </update>
+
+    <select id="queryBookById" resultType="Books">
+        select bookId, bookName, bookCounts, detail
+        from idea_test.books
+        where bookID = #{bookId};
+    </select>
+
+    <select id="queryAllBooks" resultType="Books">
+        select * from idea_test.books;
+    </select>
+    
+    <update id="resetAutoIncrement">
+        alter table idea_test.books auto_increment=1;
+    </update>
+
+    <select id="queryBookByName" resultType="Books">
+        select bookId, bookName, bookCounts, detail
+        from idea_test.books
+        where bookName = #{bookName}
+    </select>
+</mapper>
